@@ -16,14 +16,14 @@ pipeline{
         stage("deploy-dev"){
             steps{
                 sshagent(['1c1c2bda-d1f3-482a-878a-57822d5aee60']) {
-                sh """
-                    scp -o StrictHostKeyChecking=no target/sivaram  ec2-user@172.31.35.83:/home/ec2-user/apache-tomcat-9.0.73/sivaram/
+                sh ""
+                 
                     
                     ssh ec2-user@172.31.35.83 /home/ec2-user/apache-tomcat-9.0.73/bin/shutdown.sh
                     
                     ssh ec2-user@172.31.35.83 /home/ec2-user/apache-tomcat-9.0.73/bin/startup.sh
                 
-                """
+                ""
             }
             
             }
