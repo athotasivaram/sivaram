@@ -4,26 +4,26 @@ pipeline{
     stages{
         stage("Git Checkout"){
             steps{
-                git credentialsId: 'git exe', url: 'https://github.com/athotasivaram/sivaram.git'
+                git credentialsId: '35122256-b843-4ddb-b447-983b11b82084', url: 'https://github.com/athotasivaram/sivaram.git'
             }
         }
         stage("Maven Build"){
             steps{
                 sh "mvn clean package"
-             
+                sh "mv target/*.war target/sivaram.war"
             }
         }
         stage("deploy-dev"){
             steps{
-                sshagent(['1c1c2bda-d1f3-482a-878a-57822d5aee60']) {
-                sh ""
-                 
+                sshagent(['2e78565b-da12-46eb-9bc3-6d92f5b8b4a2']) {
+                sh """
+                    scp -o StrictHostKeyChecking=no target/myweb.war  ec2-user@172.31.34.161:/home/ec2-user/apache-tomcat-9.0.73/sivaram/
                     
-                    ssh ec2-user@172.31.35.83 /home/ec2-user/apache-tomcat-9.0.73/bin/shutdown.sh
+                    ssh ec2-user@172.31.34.161 /home/ec2-user/apache-tomcat-9.0.73/bin/shutdown.sh
                     
-                    ssh ec2-user@172.31.35.83 /home/ec2-user/apache-tomcat-9.0.73/bin/startup.sh
+                    ssh ec2-user@172.31.34.161 /home/ec2-user/apache-tomcat-9.0.73/bin/startup.sh
                 
-                ""
+                """
             }
             
             }
