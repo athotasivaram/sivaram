@@ -8,9 +8,6 @@
     <artifactId>sivaram</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-	<version>8.2.0</version>
-	<name>html home</name>
-	<url>http://maven.apache.org</url 
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
