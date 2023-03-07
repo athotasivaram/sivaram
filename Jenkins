@@ -19,6 +19,7 @@ pipeline{
                 sh """
                  
                     scp -o StrictHostKeyChecking=no target/sivara  ec2-user@172.31.35.83:/home/ec2-user/apache-tomcat-9.0.73/sivaram/
+                    
                     ssh ec2-user@172.31.35.83 /home/ec2-user/apache-tomcat-9.0.73/bin/shutdown.sh
                     
                     ssh ec2-user@172.31.35.83 /home/ec2-user/apache-tomcat-9.0.73/bin/startup.sh
